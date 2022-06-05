@@ -58,14 +58,27 @@ def employees():
     # To find() all the entries inside collection name 'employees'
     records = collection.find()
     for record in records:
-        json_list.append({
-            "id":record[0],
-            "first_name":record[1],
-            "last_name":record[2],
-            "email":record[3],
-            "department":record[4],
-        })
+        json_list.append(record)
     return render_template("employees.html", employees=json_list)
+
+
+@app.route('/tasks', methods=['GET'])
+def tasks():
+    json_list = []
+    try:
+        conn = MongoClient(CONNECTION_STRING)
+        print("Connected successfully!!!")
+    except:  
+        print("Could not connect to MongoDB")
+    db_emp = conn.employees
+    db_task = conn.tasks
+    emp_collection = db.employees
+    task_collection = db.tasks
+    # To find() all the entries inside collection name 'employees'
+    records = collection.find()
+    for record in records:
+        json_list.append(record)
+    return render_template("tasks.html", employees=json_list)
 
 
 @app.route('/')
