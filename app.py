@@ -72,13 +72,13 @@ def tasks():
         print("Could not connect to MongoDB")
     db_emp = conn.employees
     db_task = conn.tasks
-    emp_collection = db.employees
-    task_collection = db.tasks
+    emp_collection = db_emp.employees
+    task_collection = db_task.tasks
     # To find() all the entries inside collection name 'employees'
-    records = collection.find()
+    records = task_collection.find()
     for record in records:
         json_list.append(record)
-    return render_template("tasks.html", employees=json_list)
+    return render_template("tasks.html", tasks=json_list)
 
 
 @app.route('/')

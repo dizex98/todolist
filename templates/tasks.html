@@ -21,18 +21,17 @@
         <table style="text-align:center" border="1">
             <tr>
                 <th>Task ID</th>
-                <th>First Name</th>
+                <th>employee_id</th>
                 <th>Last Name</th>
-                <th>Descreption</th>
+                <th>Description</th>
                 <th>Due Date</th>
                 <th></th>
             </tr>
             {% for task in tasks %}
             <tr>
                 <td>{{ task.get("id") }}</td>
-                <td>{{ task.get("first_name") }}</td>
-                <td>{{ task.get("last_name") }}</td>
-                <td>{{ task.get("descreption") }}</td>
+                <td>{{ task.get("employee_id") }}</td>
+                <td>{{ task.get("description") }}</td>
                 <td>{{ task.get("due_date") }}</td>
             </tr>
             {% endfor %}
