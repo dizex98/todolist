@@ -45,26 +45,27 @@ def health():
         return render_template("health.html",status ="Oops.. The database is unreachable :("),500
 
 
-@app.route('/all', methods=['GET'])
-def all():
-    # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    print("hello")
-    docs = []
+@app.route('/employees', methods=['GET'])
+def employees():
+    json_list = []
     try:
         conn = MongoClient(CONNECTION_STRING)
         print("Connected successfully!!!")
     except:  
         print("Could not connect to MongoDB")
     db = conn.employees
-    
-    # Created or Switched to collection names: myTable
     collection = db.employees
-    
-    # To find() all the entries inside collection name 'myTable'
-    cursor = collection.find()
-    for record in cursor:
-        docs.append(record)
-    return docs
+    # To find() all the entries inside collection name 'employees'
+    records = collection.find()
+    for record in records:
+        json_list.append({
+            "id":record[0],
+            "first_name":record[1],
+            "last_name":record[2],
+            "email":record[3],
+            "department":record[4],
+        })
+    return render_template("employees.html", employees=json_list)
 
 
 @app.route('/')
