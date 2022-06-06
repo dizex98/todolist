@@ -7,7 +7,7 @@ pipeline {
     environment {
         new_tag = "2.1.${env.BUILD_ID}"
     }
-
+    //comment
     stages {        
         stage('Checkout')
         {
