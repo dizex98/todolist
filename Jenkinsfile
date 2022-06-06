@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
-        maven "maven-3.6.2"
-    }
+    // tools {
+    //     maven "maven-3.6.2"
+    // }
     
     environment {
         new_tag = "2.1.${env.BUILD_ID}"
