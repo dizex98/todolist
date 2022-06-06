@@ -25,10 +25,12 @@ pipeline {
         }
         stage('Test') {
             steps {
+                echo " On Test stage...."
             }
         }
         stage('Package') {
             steps {
+                echo " On Package stage...."
             }
         }
 
@@ -39,36 +41,45 @@ pipeline {
                     branch pattern: "master"
                 }
             }
+            // steps {
+            //     echo "E2E Test...."
+            //     sh ( "curl -u jenkins:password http://artifactory:8081/artifactory/libs-snapshot-local/com/lidar/simulator/99-SNAPSHOT/simulator-99-20220502.122521-1.jar -o simulator.jar" )
+            //     sh ( "curl -u jenkins:password http://artifactory:8081/artifactory/libs-snapshot-local/com/lidar/telemetry/99-SNAPSHOT/telemetry-99-20220502.132402-4.jar -o telemetry.jar")
+            //     sh ( "cp target/analytics-99-SNAPSHOT.jar . ")
+            //     sh ( "cp ../tests.txt tests.txt")
+            //     sh ( "ls -la")
+            //     echo "running tests"
+            //     sh ( "java -cp simulator.jar:telemetry.jar:analytics-99-SNAPSHOT.jar com.lidar.simulation.Simulator")
+            // }
             steps {
-                echo "E2E Test...."
-                sh ( "curl -u jenkins:password http://artifactory:8081/artifactory/libs-snapshot-local/com/lidar/simulator/99-SNAPSHOT/simulator-99-20220502.122521-1.jar -o simulator.jar" )
-                sh ( "curl -u jenkins:password http://artifactory:8081/artifactory/libs-snapshot-local/com/lidar/telemetry/99-SNAPSHOT/telemetry-99-20220502.132402-4.jar -o telemetry.jar")
-                sh ( "cp target/analytics-99-SNAPSHOT.jar . ")
-                sh ( "cp ../tests.txt tests.txt")
-                sh ( "ls -la")
-                echo "running tests"
-                sh ( "java -cp simulator.jar:telemetry.jar:analytics-99-SNAPSHOT.jar com.lidar.simulation.Simulator")
+                echo " On E2E stage...."
             }
         }
 
         stage("Tag"){
             when {
-                branch pattern: 'release/*'
+                branch pattern: 'master'
             }
-            steps{
-                git branch: env.BRANCH_NAME, credentialsId: 'gitlab', url: "git@gitlab:developer/analytics.git"
-                sh "git tag ${new_tag} && git push --tag"
+            // steps{
+            //     git branch: env.BRANCH_NAME, credentialsId: 'gitlab', url: "git@gitlab:developer/analytics.git"
+            //     sh "git tag ${new_tag} && git push --tag"
+            // }
+            steps {
+                echo " On tag stage...."
             }
         }
 
         stage('Publish') {
             when {
-                branch pattern: 'release/*'
+                branch pattern: 'master'
             }
-            steps{
-                sh "mvn versions:set -DnewVersion=${new_tag}" 
-                sh "mvn dependency:list"
-                sh "mvn deploy -DskipTests"
+            // steps{
+            //     sh "mvn versions:set -DnewVersion=${new_tag}" 
+            //     sh "mvn dependency:list"
+            //     sh "mvn deploy -DskipTests"
+            // }
+            steps {
+                echo " On Publish stage...."
             }
         }
     }
