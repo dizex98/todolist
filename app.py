@@ -77,9 +77,12 @@ def tasks():
     task_collection = db_task.tasks
     records = task_collection.find()
     for record in records:
-        employee = emp_collection.find_one({"id":record.get("employee_id")})
-        record["first_name"] = employee.get("first_name")
-        record["last_name"] = employee.get("last_name")
+        try:
+            employee = emp_collection.find_one({"id":record.get("employee_id")})
+            record["first_name"] = employee.get("first_name")
+            record["last_name"] = employee.get("last_name")
+        except:
+            continue
         json_list.append(record)
     return render_template("tasks.html", tasks=json_list)
 
