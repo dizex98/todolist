@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, jsonify
 # import mysql.connector
 # from mysql.connector import Error
 from datetime import date, datetime
+import sys
 import os
 import csv
 import json
@@ -74,9 +75,11 @@ def tasks():
     db_task = conn.tasks
     emp_collection = db_emp.employees
     task_collection = db_task.tasks
-    # To find() all the entries inside collection name 'employees'
     records = task_collection.find()
     for record in records:
+        employee = emp_collection.find_one({"id":record.get("employee_id")})
+        record["first_name"] = employee.get("first_name")
+        record["last_name"] = employee.get("last_name")
         json_list.append(record)
     return render_template("tasks.html", tasks=json_list)
 
