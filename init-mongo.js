@@ -3,8 +3,12 @@ db.createUser({
     pwd: 'itay',
     roles: [
         {
-            role: 'readWrite',
-            db: 'employees',
+          role: 'readWrite',
+          db: 'employees',
+        },
+        {
+          role: 'readWrite',
+          db: 'tasks',
         },
     ],
 });
