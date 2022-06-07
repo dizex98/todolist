@@ -28,8 +28,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo "On Test stage...."
-                // sh '''GATEWAY=$'''
-                sh '''curl $(docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d "\"" -f4):5000'''
+                // sh '''GATEWAY=$(docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d "\"" -f4)'''
+                sh '''curl 172.17.0.1:5000'''
                 sh '''docker kill todolist && docker rm -f todolist'''
             }
         }
