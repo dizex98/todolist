@@ -21,8 +21,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo "On Build stage...."
-                sh '''docker-compose down'''            
-                sh '''docker-compose up --build -d'''
+                sh '''docker kill todolist && docker rm todolist'''
+                sh '''docker build -t todolist .'''            
+                sh '''docker run --name todolist -it tofolist'''
             }
         }
         stage('Test') {
