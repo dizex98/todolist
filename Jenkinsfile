@@ -20,17 +20,17 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo " On build stage...."
+                echo "On build stage...."
             }
         }
         stage('Test') {
             steps {
-                echo " On Test stage...."
+                echo "On Test stage...."
             }
         }
         stage('Package') {
             steps {
-                echo " On Package stage...."
+                echo "On Package stage...."
             }
         }
 
@@ -52,7 +52,7 @@ pipeline {
             //     sh ( "java -cp simulator.jar:telemetry.jar:analytics-99-SNAPSHOT.jar com.lidar.simulation.Simulator")
             // }
             steps {
-                echo " On E2E stage...."
+                echo "On E2E stage...."
             }
         }
 
@@ -65,7 +65,7 @@ pipeline {
             //     sh "git tag ${new_tag} && git push --tag"
             // }
             steps {
-                echo " On tag stage...."
+                echo "On tag stage...."
             }
         }
 
@@ -79,7 +79,7 @@ pipeline {
             //     sh "mvn deploy -DskipTests"
             // }
             steps {
-                echo " On Publish stage...."
+                echo "On Publish stage...."
             }
         }
     }
