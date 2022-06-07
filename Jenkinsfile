@@ -21,8 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "On Build stage...."
-                sh '''pwd'''
-                sh '''ls -l'''
+                sh '''docker-compose down'''            
                 sh '''docker-compose up --build -d'''
             }
         }
