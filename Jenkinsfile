@@ -21,16 +21,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo "On Build stage...."
-                sh '''docker kill todolist && docker rm todolist'''
                 sh '''docker build -t todolist .'''            
-                sh '''docker run --name todolist -it tofolist'''
+                sh '''docker run --name todolist -p 5000:5000 -it todolist'''
             }
         }
         stage('Test') {
             steps {
                 echo "On Test stage...."
-                sh '''curl localhost'''
-                sh '''docker-compose down'''
+                // sh '''curl todolist:5000'''
+                sh '''docker kill todolist && docker rm -f todolist'''
             }
         }
         stage('Package') {
