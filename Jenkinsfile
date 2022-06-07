@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo "On Build stage...."
                 sh '''docker build -t todolist .'''            
-                sh '''docker run --name todolist -p 5000:5000 -it todolist'''
+                sh '''docker run --name todolist -p 5000:5000 -d todolist'''
             }
         }
         stage('Test') {
