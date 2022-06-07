@@ -20,12 +20,15 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "On build stage...."
+                echo "On Build stage...."
+                sh '''docker-compose up --build -d'''
             }
         }
         stage('Test') {
             steps {
                 echo "On Test stage...."
+                sh '''curl localhost'''
+                sh '''docker-compose down'''
             }
         }
         stage('Package') {
