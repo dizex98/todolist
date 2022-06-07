@@ -28,7 +28,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "On Test stage...."
-                // sh '''curl todolist:5000'''
+                sh '''curl todolist:5000'''
                 sh '''docker kill todolist && docker rm -f todolist'''
             }
         }
