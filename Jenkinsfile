@@ -28,7 +28,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "On Test stage...."
-                sh '''gateway=$(docker inspect jtodolist | grep \"Gateway\" | tail -n1 | cut -d "\"" -f4)'''
+                sh '''gateway=$(docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d "\"" -f4)'''
                 sh '''curl $gateway:5000'''
                 sh '''docker kill todolist && docker rm -f todolist'''
             }
