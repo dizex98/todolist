@@ -6,6 +6,7 @@ pipeline {
     
     environment {
         new_tag = "2.1.${env.BUILD_ID}"
+        gateway = "docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d "\"" -f4\"
     }
     //comment
     stages {        
@@ -29,9 +30,8 @@ pipeline {
             steps {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
-                // sh '''GATEWAY=$(docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d "\"" -f4)'''
                 sleep 3
-                sh '''curl 172.17.0.1:5000'''
+                sh '''curl ${env.gateway}:5000'''
                 sh '''docker kill todolist && docker rm -f todolist'''
                 sh '''docker image rm -f todolist'''
             }
