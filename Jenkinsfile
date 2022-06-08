@@ -111,6 +111,7 @@ pipeline {
             sh '''docker kill todolist && docker rm -f todolist'''
             sh '''docker image rm -f todolist $image_name:$tag'''
             sh '''docker images'''
+            sh '''docker-compose down'''
         }
     }
 }
