@@ -32,8 +32,6 @@ pipeline {
                 // need to execute it not hardcoded.
                 sleep 3
                 sh '''curl ${env.gateway}:5000'''
-                sh '''docker kill todolist && docker rm -f todolist'''
-                sh '''docker image rm -f todolist'''
             }
         }
         stage('Package') {
@@ -89,6 +87,14 @@ pipeline {
             steps {
                 echo "On Publish stage...."
             }
+        }
+
+    }
+    post {
+        always {
+            // One or more steps need to be included within each condition's block.
+            sh '''docker kill todolist && docker rm -f todolist'''
+            sh '''docker image rm -f todolist'''
         }
     }
 }
