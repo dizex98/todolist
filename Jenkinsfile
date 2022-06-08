@@ -31,9 +31,11 @@ pipeline {
                 // need to execute it not hardcoded.
                 sleep 3
                 script {
-                    env.gateway = sh( script: "docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d '\"' -f4",returnStdout: true).trim()
+                    env.GATEWAY = sh( 
+                        script: "docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d '\"' -f4",returnStdout: true
+                        ).trim()
                     // sh '''curl ${env.gateway}:5000'''
-                    echo "gateway: ${env.gateway}"
+                    echo "gateway: ${env.GATEWAY}"
                 }
             }
         }
