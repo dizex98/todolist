@@ -32,7 +32,7 @@ pipeline {
                 sleep 3
                 script {
                     env.GATEWAY = sh( 
-                        script: "docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d '\"' -f4",returnStdout: true
+                        script: "docker inspect todolist | grep \"Gateway\" | tail -n 1 | cut -d '\"' -f4",returnStdout: true
                         ).trim()
                     // sh '''curl ${env.gateway}:5000'''
                     echo "gateway: ${env.GATEWAY}"
@@ -95,11 +95,11 @@ pipeline {
         }
 
     }
-    post {
-        always {
-            // One or more steps need to be included within each condition's block.
-            sh '''docker kill todolist && docker rm -f todolist'''
-            sh '''docker image rm -f todolist'''
-        }
-    }
+    // post {
+    //     always {
+    //         // One or more steps need to be included within each condition's block.
+    //         sh '''docker kill todolist && docker rm -f todolist'''
+    //         sh '''docker image rm -f todolist'''
+    //     }
+    // }
 }
