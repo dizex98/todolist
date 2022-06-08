@@ -5,9 +5,7 @@ pipeline {
     // }
     
     environment {
-        new_tag = "2.1.${env.BUILD_ID}"
-        gateway = sh( script: "docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d '\"' -f4",returnStdout: true).trim()
-        
+        new_tag = "2.1.${env.BUILD_ID}"        
     }
     //comment
     stages {        
@@ -32,7 +30,8 @@ pipeline {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
                 sleep 3
-                //sh '''curl ${env.gateway}:5000'''
+                env.gateway = sh( script: "docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d '\"' -f4",returnStdout: true).trim()
+                // sh '''curl ${env.gateway}:5000'''
                 echo "gateway: ${env.gateway}"
             }
         }
