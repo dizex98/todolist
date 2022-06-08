@@ -6,7 +6,8 @@ pipeline {
     
     environment {
         new_tag = "2.1.${env.BUILD_ID}"
-        gateway = "${docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d '\"' -f4}"
+        gateway = sh( script: "docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d '\"' -f4",returnStdout: true).trim()
+        
     }
     //comment
     stages {        
