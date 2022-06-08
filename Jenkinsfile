@@ -34,13 +34,13 @@ pipeline {
                 sleep 3
                 sh '''curl 172.17.0.1:5000'''
                 //getting null variable, check this later
-                script {
-                    env.GATEWAY = sh( 
-                        script: "docker inspect todolist | grep \"Gateway\" | tail -n 1 | cut -d '\"' -f4",returnStdout: true
-                        ).trim()
-                    // sh '''curl ${env.gateway}:5000'''
-                    echo "gateway: ${env.GATEWAY}"
-                }
+                // script {
+                //     env.GATEWAY = sh( 
+                //         script: "docker inspect todolist | grep \"Gateway\" | tail -n 1 | cut -d '\"' -f4",returnStdout: true
+                //         ).trim()
+                //     // sh '''curl ${env.gateway}:5000'''
+                //     echo "gateway: ${env.GATEWAY}"
+                // }
             }
         }
         stage('Package') {
@@ -108,6 +108,7 @@ pipeline {
             // One or more steps need to be included within each condition's block.
             sh '''docker kill todolist && docker rm -f todolist'''
             sh '''docker image rm -f todolist $image_name:$tag'''
+            sh '''docker images'''
         }
     }
 }
