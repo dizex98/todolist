@@ -72,6 +72,8 @@ pipeline {
             // }
             steps {
                 echo "On E2E stage...."
+                sh '''docker-compose up --build -d'''
+                sh '''docker-compose down'''
             }
         }
 
