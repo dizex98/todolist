@@ -28,7 +28,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "On Test stage...."
-                // need to execute it not hardcoded
+                // need to execute it not hardcoded.
                 // sh '''GATEWAY=$(docker inspect todolist | grep \"Gateway\" | tail -n1 | cut -d "\"" -f4)'''
                 sh '''curl 172.17.0.1:5000'''
                 sh '''docker kill todolist && docker rm -f todolist'''
