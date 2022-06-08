@@ -31,7 +31,8 @@ pipeline {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
                 sleep 3
-                sh '''curl ${env.gateway}:5000'''
+                //sh '''curl ${env.gateway}:5000'''
+                echo "gateway: ${env.gateway}"
             }
         }
         stage('Package') {
