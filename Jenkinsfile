@@ -30,13 +30,14 @@ pipeline {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
                 sleep 3
-                script {
-                    env.GATEWAY = sh( 
-                        script: "docker inspect todolist | grep \"Gateway\" | tail -n 1 | cut -d '\"' -f4",returnStdout: true
-                        ).trim()
-                    // sh '''curl ${env.gateway}:5000'''
-                    echo "gateway: ${env.GATEWAY}"
-                }
+                sh '''curl 172.17.0.1:5000'''
+                // script {
+                //     env.GATEWAY = sh( 
+                //         script: "docker inspect todolist | grep \"Gateway\" | tail -n 1 | cut -d '\"' -f4",returnStdout: true
+                //         ).trim()
+                //     // sh '''curl ${env.gateway}:5000'''
+                //     echo "gateway: ${env.GATEWAY}"
+                // }
             }
         }
         stage('Package') {
