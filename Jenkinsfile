@@ -5,7 +5,9 @@ pipeline {
     // }
     
     environment {
-        new_tag = "2.1.${env.BUILD_ID}"        
+        new_tag = "2.1.${env.BUILD_ID}"
+        image_name = "todolist gcr.io/portfolio-todolist-352710/todolist"
+        tag = "latest"        
     }
     //comment
     stages {        
@@ -44,6 +46,10 @@ pipeline {
         stage('Package') {
             steps {
                 echo "On Package stage...."
+                script {
+                    sh '''docker tag ${env.image_name}:${env.tag}'''
+                    sh '''docker images'''
+                }
             }
         }
 
