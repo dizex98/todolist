@@ -106,8 +106,8 @@ pipeline {
     post {
         always {
             // One or more steps need to be included within each condition's block.
-            sh '''docker kill todolist && docker rm -f todolist'''
-            sh '''docker image rm -f todolist'''
+            sh '''docker kill todolist $image_name:$tag && docker rm -f todolist $image_name:$tag'''
+            sh '''docker image rm -f todolist $image_name:$tag'''
         }
     }
 }
