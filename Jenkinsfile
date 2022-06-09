@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo "On Build stage...."
                 sh '''docker build -t todolist .'''            
-                sh '''docker run --name todolist -p 5000:5000 -d todolist'''
+                sh '''docker run --name todolist -p 4000:5000 -d todolist'''
             }
         }
         stage('Test') {
@@ -32,9 +32,7 @@ pipeline {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
                 sleep 3
-                sh '''curl 172.17.0.1:5000'''
-                sh '''docker kill todolist && docker rm -f todolist'''
-                sh '''docker image rm -f todolist $image_name:$tag'''
+                sh '''curl 172.17.0.1:4000'''
                 //getting null variable, check this later
                 // script {
                 //     env.GATEWAY = sh( 
