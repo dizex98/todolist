@@ -33,6 +33,8 @@ pipeline {
                 // need to execute it not hardcoded.
                 sleep 3
                 sh '''curl 172.17.0.1:5000'''
+                sh '''docker kill todolist && docker rm -f todolist'''
+                sh '''docker image rm -f todolist $image_name:$tag'''
                 //getting null variable, check this later
                 // script {
                 //     env.GATEWAY = sh( 
