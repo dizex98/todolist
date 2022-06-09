@@ -6,7 +6,7 @@ services:
       - "80:80"
     volumes:
       - ./templates:/usr/share/nginx/html/static/
-      - ./nginx.conf:/etc/nginx/
+      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - backend
   mongo:
