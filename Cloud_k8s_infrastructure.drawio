@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-06-09T09:00:54.912Z" agent="5.0 (X11)" etag="6G0yOuuJLAjlgxCah1jX" version="19.0.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-06-09T09:03:59.693Z" agent="5.0 (X11)" etag="_ZGwNfeDBAXpgXXdSUtl" version="19.0.3" type="github">
   <diagram id="ad-lsBwaoq_hX-LNnD97" name="Page-1">
     <mxGraphModel dx="2272" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -210,8 +210,8 @@
         <mxCell id="Xq1n-c8aseyyMUb2qtHi-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.007;entryY=0.786;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=18;" parent="1" source="Xq1n-c8aseyyMUb2qtHi-80" target="bWGEidWGkiljW06ko3HO-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Xq1n-c8aseyyMUb2qtHi-83" value="git push" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontSize=18;" parent="1" vertex="1">
-          <mxGeometry x="-210" y="709" width="80" height="30" as="geometry" />
+        <mxCell id="Xq1n-c8aseyyMUb2qtHi-83" value="git pull" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="-195" y="709" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Xq1n-c8aseyyMUb2qtHi-85" value="git tag" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="-166.04" y="1080" width="60" height="30" as="geometry" />
