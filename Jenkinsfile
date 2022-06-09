@@ -110,6 +110,7 @@ pipeline {
             // One or more steps need to be included within each condition's block.
             sh '''docker kill todolist && docker rm -f todolist'''
             sh '''docker image rm -f todolist $image_name:$tag'''
+            sh '''docker image rm -f todolist_master_backend'''
             sh '''docker images'''
             sh '''docker-compose down'''
         }
