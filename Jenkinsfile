@@ -73,6 +73,7 @@ pipeline {
             steps {
                 echo "On E2E stage...."
                 sh '''docker-compose up --build -d'''
+                sleep 20
                 sh '''docker-compose down'''
             }
         }
