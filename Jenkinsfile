@@ -102,6 +102,7 @@ pipeline {
             // }
             steps {
                 echo "On Publish stage...."
+                sh "gcloud container clusters get-credentials todolist --zone europe-west9-c --project portfolio-todolist-352710"
             }
         }
 
