@@ -6,7 +6,7 @@ pipeline {
     
     environment {
         new_tag = "2.1.${env.BUILD_ID}"
-        image_name = "todolist gcr.io/portfolio-todolist-352710/todolist"
+        image_name = "gcr.io/portfolio-todolist-352710/todolist"
         tag = "latest"        
     }
     //comment
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 echo "On Package stage...."
                 script {
-                    sh '''docker tag $image_name:$tag'''
+                    sh '''docker tag todolist $image_name:$tag'''
                     sh '''docker images'''
                 }
             }
@@ -110,7 +110,8 @@ pipeline {
     post {
         always {
             sh '''docker kill todolist && docker rm -f todolist'''
-            sh '''docker image rm -f todolist $image_name:$tag'''
+            sh '''docker image rm -f todolist'''
+            // sh '''docker image rm -f $image_name:$tag'''
             sh '''docker image rm -f todolistmaster_backend'''
             sh '''docker images'''
             sh '''docker-compose down'''
