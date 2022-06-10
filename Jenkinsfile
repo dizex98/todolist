@@ -9,7 +9,6 @@ pipeline {
         image_name = "gcr.io/portfolio-todolist-352710/todolist"
         tag = "latest"        
     }
-    //comment
     stages {        
         stage('Checkout')
         {
@@ -60,16 +59,6 @@ pipeline {
                     branch pattern: "master"
                 }
             }
-            // steps {
-            //     echo "E2E Test...."
-            //     sh ( "curl -u jenkins:password http://artifactory:8081/artifactory/libs-snapshot-local/com/lidar/simulator/99-SNAPSHOT/simulator-99-20220502.122521-1.jar -o simulator.jar" )
-            //     sh ( "curl -u jenkins:password http://artifactory:8081/artifactory/libs-snapshot-local/com/lidar/telemetry/99-SNAPSHOT/telemetry-99-20220502.132402-4.jar -o telemetry.jar")
-            //     sh ( "cp target/analytics-99-SNAPSHOT.jar . ")
-            //     sh ( "cp ../tests.txt tests.txt")
-            //     sh ( "ls -la")
-            //     echo "running tests"
-            //     sh ( "java -cp simulator.jar:telemetry.jar:analytics-99-SNAPSHOT.jar com.lidar.simulation.Simulator")
-            // }
             steps {
                 echo "On E2E stage...."
                 // sh '''docker-compose up --build -d'''
@@ -95,11 +84,6 @@ pipeline {
             when {
                 branch pattern: 'master'
             }
-            // steps{
-            //     sh "mvn versions:set -DnewVersion=${new_tag}" 
-            //     sh "mvn dependency:list"
-            //     sh "mvn deploy -DskipTests"
-            // }
             steps {
                 echo "On Publish stage...."
                 sh "gcloud container clusters get-credentials todolist --zone europe-west9-c --project portfolio-todolist-352710"
