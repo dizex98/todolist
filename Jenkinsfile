@@ -72,9 +72,9 @@ pipeline {
             // }
             steps {
                 echo "On E2E stage...."
-                sh '''docker-compose up --build -d'''
-                sleep 20
-                sh '''docker-compose down'''
+                // sh '''docker-compose up --build -d'''
+                // sleep 20
+                // sh '''docker-compose down'''
             }
         }
 
@@ -111,7 +111,7 @@ pipeline {
         always {
             sh '''docker kill todolist && docker rm -f todolist'''
             sh '''docker image rm -f todolist $image_name:$tag'''
-            sh '''docker image rm -f todolist_master_backend'''
+            sh '''docker image rm -f todolistmaster_backend'''
             sh '''docker images'''
             sh '''docker-compose down'''
         }
