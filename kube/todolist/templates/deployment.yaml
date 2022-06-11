@@ -35,12 +35,17 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
               port: http
+          envFrom:
+          - secretRef:
+              name: todolist
+          - configMapRef:
+              name: todolist
           readinessProbe:
             httpGet:
               path: /
@@ -59,3 +64,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todolist
+data:
+  LOG_LEVEL: "info"
+  PERSISTENCE: "true"
