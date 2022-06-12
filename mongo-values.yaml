@@ -1,5 +1,4 @@
-architecture: standalone
-useStatefulSet: true
+architecture: replicaset
 replicaCount: 1
 auth:
   enabled: true
@@ -28,7 +27,7 @@ initdbScripts:
           role: 'readWrite',
           db: 'tasks',
         },
-      ]})m;
+      ]});
     dbe = new Mongo().getDB("employees");
     dbt = new Mongo().getDB("tasks");
     dbe.createCollection('employees', { capped: false });
