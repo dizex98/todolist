@@ -30,7 +30,7 @@ pipeline {
             steps {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
-                sleep 100S
+                sleep 100
                 sh '''curl 172.17.0.1:4000'''
                 //getting null variable, check this later
                 // script {
