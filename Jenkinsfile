@@ -5,7 +5,7 @@ pipeline {
     // }
     
     environment {
-        new_tag = "2.1.${env.BUILD_ID}"
+        // new_tag = "2.1.${env.BUILD_ID}"
         image_name = "gcr.io/portfolio-todolist-352710/todolist"
         tag = "latest"        
     }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
-                sleep 3
+                sleep 100S
                 sh '''curl 172.17.0.1:4000'''
                 //getting null variable, check this later
                 // script {
