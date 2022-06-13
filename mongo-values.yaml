@@ -13,6 +13,8 @@ replicaSetName: rs0
 #   - name: extras
 #     mountPath: /data/db
 replicaSetHostnames: true
+image:
+  tag: 5.0.9
 initdbScripts:
   my_init_script.js: |
     db.createUser({
@@ -41,7 +43,7 @@ initdbScripts:
     }]);
     dbt.tasks.insert([{
       "id": 1,
-      "employee_id": 20,
+      "employee_id": 20,ex
       "description": "Evaluate the market",
       "due_date": "06/07/2022"
     }]);
