@@ -15,7 +15,17 @@ pipeline {
             steps {
                 echo "Checkout stage for clearing dir"
                 deleteDir()
-                checkout scm
+                checkout([
+                    $class: 'GitSCM',
+                    branches: scm.branches,
+                    doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+                    extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+                    userRemoteConfigs: scm.userRemoteConfigs,
+                ])
+                script {
+                    message=sh(script:"git tag").trim()
+                    echo $message
+                } 
             }
         }
 
