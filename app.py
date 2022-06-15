@@ -1,8 +1,6 @@
 from os import stat
 from webbrowser import get
-from flask import Flask, render_template, request, jsonify
-# import mysql.connector
-# from mysql.connector import Error
+from flask import Flask, render_template, request, url_for, redirect
 from datetime import date, datetime
 import sys
 import os
@@ -67,19 +65,27 @@ def employees():
 @app.route('/tasks', methods=['GET'])
 def tasks():
     json_list = []
-    try:
-        conn = MongoClient(CONNECTION_STRING)
-        print("Connected successfully!!!")
-    except:  
-        print("Could not connect to MongoDB")
+    conn = MongoClient(CONNECTION_STRING)
     db_emp = conn.employees
     db_task = conn.tasks
     emp_collection = db_emp.employees
     task_collection = db_task.tasks
+    if request.method == 'GET':
+        emp_id = request.args.get('emp_id')
+    print(f"empid={emp_id}", file=sys.stderr)
+    if emp_id != None and emp_id != "":
+        records = task_collection.find({"employee_id":int(emp_id)})
+        print(f"records={records}", file=sys.stderr)
+        employee = emp_collection.find_one({"id":int(emp_id)})
+        for record in records:
+            record["first_name"] = employee.get("first_name")
+            record["last_name"] = employee.get("last_name")
+            json_list.append(record)
+        return render_template("tasks.html", tasks=json_list)
     records = task_collection.find()
     for record in records:
         try:
-            employee = emp_collection.find_one({"id":record.get("employee_id")})
+            employee = emp_collection.find_one({"id":int(record.get("employee_id"))})
             record["first_name"] = employee.get("first_name")
             record["last_name"] = employee.get("last_name")
         except:
@@ -87,6 +93,20 @@ def tasks():
         json_list.append(record)
     return render_template("tasks.html", tasks=json_list)
 
+
+# @app.route('/tasks', methods=['GET'])
+# def emp_tasks(emp):
+#     conn = MongoClient(CONNECTION_STRING)
+#     json_list = []
+#     emp_collection = conn.employees.employees
+#     task_collection = conn.tasks.tasks
+#     records = task_collection.find({"employee_id":emp})
+#     employee = emp_collection.find_one({"id":emp})
+#     for record in records:
+#         record["first_name"] = employee.get("first_name")
+#         record["last_name"] = employee.get("last_name")
+#         json_list.append(record)
+#     return render_template("tasks.html", tasks=json_list)
 
 @app.route('/')
 def menu():
