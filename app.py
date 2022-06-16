@@ -106,6 +106,11 @@ def post_tasks():
         task_id = request.form["del_task_id"]
     except:
         task_id = ""
+    try:
+        update_task = request.form["update_task_id"]
+        update_desc = request.form["update_desc"]
+    except:
+        update_task = ""
     if emp_id != None and emp_id != "":
         task_collection.insert_one({
             "id": 999,
@@ -115,6 +120,8 @@ def post_tasks():
         })
     elif task_id != None and task_id != "":
         task_collection.delete_one({"id":int(task_id)})
+    elif update_task != None and update_task != "":
+        task_collection.update_one({"id":int(update_task)},{"$set":{"description":update_desc}})
     return redirect(url_for("get_tasks"))
 
 
