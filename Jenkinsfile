@@ -24,7 +24,7 @@ pipeline {
                 ])
                 script {
                     message=sh(script:"git tag").trim()
-                    echo $message
+                    echo "${message}"
                 } 
             }
         }
