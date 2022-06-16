@@ -32,16 +32,16 @@ pipeline {
         stage('Build') {
             steps {
                 echo "On Build stage...."
-                sh '''docker build -t todolist .'''            
-                sh '''docker run --name todolist -p 4000:5000 -d todolist'''
+                sh '''docker-compose up --build -d'''            
+                // sh '''docker run --name todolist -p 4000:5000 -d todolist'''
             }
         }
         stage('Test') {
             steps {
                 echo "On Test stage...."
                 // need to execute it not hardcoded.
-                sleep 100
-                sh '''curl 172.17.0.1:4000'''
+                // sleep 100
+                sh '''curl '''
                 //getting null variable, check this later
                 // script {
                 //     env.GATEWAY = sh( 
@@ -103,11 +103,6 @@ pipeline {
     }
     post {
         always {
-            sh '''docker kill todolist && docker rm -f todolist'''
-            sh '''docker image rm -f todolist'''
-            // sh '''docker image rm -f $image_name:$tag'''
-            sh '''docker image rm -f todolistmaster_backend'''
-            sh '''docker images'''
             sh '''docker-compose down'''
         }
     }
