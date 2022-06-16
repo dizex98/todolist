@@ -63,50 +63,60 @@ def employees():
 
 
 @app.route('/tasks', methods=['GET'])
-def tasks():
+def get_tasks():
     json_list = []
     conn = MongoClient(CONNECTION_STRING)
     db_emp = conn.employees
     db_task = conn.tasks
     emp_collection = db_emp.employees
     task_collection = db_task.tasks
-    if request.method == 'GET':
-        emp_id = request.args.get('emp_id')
-    print(f"empid={emp_id}", file=sys.stderr)
+    emp_id = request.args.get('emp_id')
     if emp_id != None and emp_id != "":
         records = task_collection.find({"employee_id":int(emp_id)})
-        print(f"records={records}", file=sys.stderr)
         employee = emp_collection.find_one({"id":int(emp_id)})
         for record in records:
             record["first_name"] = employee.get("first_name")
             record["last_name"] = employee.get("last_name")
             json_list.append(record)
         return render_template("tasks.html", tasks=json_list)
-    records = task_collection.find()
-    for record in records:
-        try:
-            employee = emp_collection.find_one({"id":int(record.get("employee_id"))})
-            record["first_name"] = employee.get("first_name")
-            record["last_name"] = employee.get("last_name")
-        except:
-            continue
-        json_list.append(record)
-    return render_template("tasks.html", tasks=json_list)
+    else:
+        records = task_collection.find()
+        for record in records:
+            try:
+                employee = emp_collection.find_one({"id":int(record.get("employee_id"))})
+                record["first_name"] = employee.get("first_name")
+                record["last_name"] = employee.get("last_name")
+            except:
+                continue
+            json_list.append(record)
+        return render_template("tasks.html", tasks=json_list)
 
 
-# @app.route('/tasks', methods=['GET'])
-# def emp_tasks(emp):
-#     conn = MongoClient(CONNECTION_STRING)
-#     json_list = []
-#     emp_collection = conn.employees.employees
-#     task_collection = conn.tasks.tasks
-#     records = task_collection.find({"employee_id":emp})
-#     employee = emp_collection.find_one({"id":emp})
-#     for record in records:
-#         record["first_name"] = employee.get("first_name")
-#         record["last_name"] = employee.get("last_name")
-#         json_list.append(record)
-#     return render_template("tasks.html", tasks=json_list)
+@app.route('/tasks', methods=['POST'])
+def post_tasks():
+    conn = MongoClient(CONNECTION_STRING)
+    task_collection = conn.tasks.tasks
+    try:
+        emp_id = request.form["emp_id"]
+        desc = request.form["desc"]
+        due_date = request.form["due_date"]
+    except:
+        emp_id = ""
+    try:
+        task_id = request.form["del_task_id"]
+    except:
+        task_id = ""
+    if emp_id != None and emp_id != "":
+        task_collection.insert_one({
+            "id": 999,
+            "employee_id": int(emp_id),
+            "description": desc,
+            "due_date": due_date
+        })
+    elif task_id != None and task_id != "":
+        task_collection.delete_one({"id":int(task_id)})
+    return redirect(url_for("get_tasks"))
+
 
 @app.route('/')
 def menu():

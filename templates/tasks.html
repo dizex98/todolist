@@ -4,31 +4,37 @@
         <title>Tasks Page</title>
     </head>
     <body>
-        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align:center">
-              <form class="form-inline my-2 my-lg-0">
-                From:<input name="from" type=text style="margin:30px;">
-                To:<input name="to" type=text style="margin:30px;">
-                Filter:<input name="filter" type=text style="margin:30px;">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin:5px;">Show</button>
-              </form>
-            </div>
-        </nav> -->
-        <h1>Get Tasks for specific Employee:</h1>
+        <h1>Get tasks for a specific Employee:</h1>
         <form action="#" method="get">
           <p>Employee id:</p>
           <p><input type="text" name="emp_id"/></p>
           <p><input type="submit" value="search"/></p>
         </form>
-          <!-- <h1>Add a new task</h1>
+          <h1>Add a new task</h1>
+          <table style="margin:10px;text-align:center">
+            <tr>  
+              <th>Employee ID</th>
+              <th>Description</th>
+              <th>Due Date</th>
+            </tr>
+            <form action="#" method="post">
+              <tr>  
+                <th><input name="emp_id" type="text" /></th>
+                <th><input name="desc" type="text" /></th>
+                <th><input name="due_date" type="text" /></th>
+              </tr>
+              <tr>
+                <th></th>
+                <th><input value="add" type="submit" /></th>
+              </tr>
+            </form>
+          </table>
+          <h1>Delete a Task</h1>
           <form action="#" method="post">
-            <p>Employee id:</p>
-            <p><input name="empid" type="text" /></p>
-            <p><input value="add" type="submit" /></p>
-          </form> -->
+            <p>Task id</p>
+            <p><input type="text" name="del_task_id"/></p>
+            <p><input type="submit" value="Delete"/></p>
+          </form>
         <table style="margin:30px;text-align:center" border="1">
             <tr>
                 <th>Task ID</th>

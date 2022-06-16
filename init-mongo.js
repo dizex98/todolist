@@ -17,6 +17,7 @@ dbe = new Mongo().getDB("employees");
 dbt = new Mongo().getDB("tasks");
 dbe.createCollection('employees', { capped: false });
 dbt.createCollection('tasks', { capped: false });
+
 dbe.employees.insert([{
     "id": NumberInt(1),
     "first_name": "Shana",
