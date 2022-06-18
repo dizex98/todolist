@@ -39,7 +39,7 @@ pipeline {
                 sleep 3
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep backend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                    echo "${env.CONTAINER_NAME}"
+                    sh("curl $env.CONTAINER_NAME:5000")
                 }
             }
         }
