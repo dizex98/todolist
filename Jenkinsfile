@@ -40,7 +40,7 @@ pipeline {
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep backend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
                     env.PORT="5000"
-                    curl "${env.CONTAINER_NAME}:${env.PORT}"
+                    sh("curl ${env.CONTAINER_NAME}:${env.PORT}")
                 }
             }
         }
