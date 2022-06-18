@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    // tools {
-    //     maven "maven-3.6.2"
-    // }
     
     environment {
         // new_tag = "2.1.${env.BUILD_ID}"
@@ -42,7 +39,7 @@ pipeline {
                 sleep 3
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep backend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                    sh '''curl ${env.CONTAINER_NAME}:5000'''
+                    echo ${env.CONTAINER_NAME}
                 }
             }
         }
