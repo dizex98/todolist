@@ -7,7 +7,7 @@ pipeline {
     environment {
         // new_tag = "2.1.${env.BUILD_ID}"
         image_name = "gcr.io/portfolio-todolist-352710/todolist"
-        tag = "latest"        
+        tag = "latest"
     }
     stages {        
         stage('Checkout')
@@ -41,8 +41,8 @@ pipeline {
                 echo "On Test stage...."
                 sleep 3
                 script {
-                    container_name=sh(script:"docker ps | grep backend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                    sh '''curl ${container_name}:5000'''
+                    env.CONTAINER_NAME=sh(script:"docker ps | grep backend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
+                    sh '''curl ${env.CONTAINER_NAME}:5000'''
                 }
             }
         }
