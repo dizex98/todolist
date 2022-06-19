@@ -37,8 +37,8 @@ pipeline {
                 echo "On Test stage...."
                 sleep 3
                 script {
-                    env.CONTAINER_NAME=sh(script:"docker ps | grep backend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                    sh """curl ${env.CONTAINER_NAME}:5000/tasks"""
+                    env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
+                    sh """curl ${env.CONTAINER_NAME}/tasks"""
                 }
             }
         }
