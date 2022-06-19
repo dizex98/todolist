@@ -38,7 +38,7 @@ pipeline {
                 sleep 3
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                    sh """curl ${env.CONTAINER_NAME}/tasks -L"""
+                    sh '''curl ${env.CONTAINER_NAME}/tasks -L'''
                 }
             }
         }
