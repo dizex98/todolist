@@ -41,8 +41,8 @@ pipeline {
                 }
                 echo "${env.CONTAINER_NAME}"
                 sh """
-                    curl "http://${env.CONTAINER_NAME}"
-                    curl "http://${env.CONTAINER_NAME}/tasks"
+                    curl "${env.CONTAINER_NAME}"
+                    curl "${env.CONTAINER_NAME}/tasks"
                 """
             }
         }
