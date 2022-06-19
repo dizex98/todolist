@@ -1,25 +1,17 @@
 version: '3.3'
 services:
   frontend:
-    image: nginx:1.21-alpine
+    build: Dockerfile_nginx
     ports:
       - "80:80"
-    volumes:
-      - ./templates:/usr/share/nginx/html/static/
-      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - backend
+      - mongo
     networks:
       - portfolio_net
   mongo:
-    image: mongo:5.0.9
+    build: Dockerfile_mongo
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: itay
-    volumes:
-      - 'mongo_data:/data/db'
-      - './init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js'
     networks:
       - portfolio_net
   backend:
