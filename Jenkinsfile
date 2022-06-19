@@ -30,7 +30,6 @@ pipeline {
             steps {
                 echo "On Build stage...."
                 sh '''docker-compose up --build -d'''            
-                // sh '''docker run --name todolist -p 4000:5000 -d todolist'''
             }
         }
         stage('Test') {
@@ -40,7 +39,6 @@ pipeline {
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep backend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
                     env.PORT="5000"
-                    sh '''printenv'''
                     sh """curl ${env.CONTAINER_NAME}:5000"""
                 }
             }
@@ -64,9 +62,6 @@ pipeline {
             }
             steps {
                 echo "On E2E stage...."
-                // sh '''docker-compose up --build -d'''
-                // sleep 20
-                // sh '''docker-compose down'''
             }
         }
 
@@ -74,10 +69,6 @@ pipeline {
             when {
                 branch pattern: 'master'
             }
-            // steps{
-            //     git branch: env.BRANCH_NAME, credentialsId: 'gitlab', url: "git@gitlab:developer/analytics.git"
-            //     sh "git tag ${new_tag} && git push --tag"
-            // }
             steps {
                 echo "On tag stage...."
             }
