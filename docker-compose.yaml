@@ -1,16 +1,19 @@
 version: '3.3'
 services:
   frontend:
-    build: Dockerfile_nginx
+    build: 
+      dockerfile: Dockerfile_nginx
+      context: .
     ports:
       - "80:80"
     depends_on:
       - backend
-      - mongo
     networks:
       - portfolio_net
   mongo:
-    build: Dockerfile_mongo
+    build: 
+      dockerfile: Dockerfile_mongo
+      context: .
     restart: always
     networks:
       - portfolio_net
@@ -18,8 +21,8 @@ services:
     build: .
     depends_on:
       - mongo
-    ports:
-      - "5000:5000"
+    # ports:
+    #   - "5000:5000"
     networks:
       - portfolio_net
 volumes:
