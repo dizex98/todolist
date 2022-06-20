@@ -40,7 +40,7 @@ pipeline {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
                 }
                 echo "${env.CONTAINER_NAME}"
-                sh """curl '${env.CONTAINER_NAME}:5000'"""
+                sh """curl '${env.CONTAINER_NAME}:80'"""
             }
         }
         stage('Package') {
