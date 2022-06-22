@@ -1,0 +1,15 @@
+architecture: replicaset
+replicaCount: 1
+auth:
+  enabled: true
+  rootUser: root
+  rootPassword: "itay"
+  databases: [ "employees","tasks" ]
+  usernames: [ "root","root" ]
+  passwords: [ "itay","itay" ]
+replicaSetName: rs0
+#when im adding this the container is not up
+# extraVolumeMounts:
+#   - name: extras
+#     mountPath: /data/db
+replicaSetHostnames: true
