@@ -26,4 +26,13 @@ resource "helm_release" "mongodb" {
   ]
 }
 
-##### need to add my edited image for mongo and add the todolist app.
+resource "helm_release" "argocd" {
+  name       = "argocd"
+  repository = "https://raw.githubusercontent.com/devtron-labs/charts/gh-pages"
+  chart      = "argocd"
+}
+
+resource "helm_release" "todolist" {
+  name       = "todolist"
+  chart      = "../kube/todolist"
+}
