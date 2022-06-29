@@ -46,6 +46,7 @@ pipeline {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
                 }
                 echo "${env.CONTAINER_NAME}"
+                echo "docker-compose ps"
                 sh """curl ${env.CONTAINER_NAME}"""
             }
         }
