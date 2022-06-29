@@ -19,6 +19,7 @@ pipeline {
                     extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
                     userRemoteConfigs: scm.userRemoteConfigs,
                 ])
+                sh """git tag"""
                 script {
                     message=sh(script:"git tag",returnStdout: true)
                     echo "${message}"
