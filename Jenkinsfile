@@ -2,30 +2,31 @@ pipeline {
     agent any
     
     environment {
-        // new_tag = "2.1.${env.BUILD_ID}"
-        image_name = "gcr.io/portfolio-todolist-352710/todolist"
+        repository = "644435390668.dkr.ecr.eu-central-1.amazonaws.com"
+        app_image = "todolist-itay-app"
+        mongo_image = "todolist-itay-mongo"
         tag = "latest"
     }
-    stages {        
-        stage('Checkout')
-        {
-            steps {
-                echo "Checkout stage for clearing dir"
-                deleteDir()
-                checkout([
-                    $class: 'GitSCM',
-                    branches: scm.branches,
-                    doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-                    extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
-                    userRemoteConfigs: scm.userRemoteConfigs,
-                ])
-                sh """git tag"""
-                script {
-                    message=sh(script:"git tag",returnStdout: true)
-                    echo "${message}"
-                } 
-            }
-        }
+    // stages {        
+    //     stage('Checkout')
+    //     {
+    //         steps {
+    //             echo "Checkout stage for clearing dir"
+    //             deleteDir()
+    //             checkout([
+    //                 $class: 'GitSCM',
+    //                 branches: scm.branches,
+    //                 doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+    //                 extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+    //                 userRemoteConfigs: scm.userRemoteConfigs,
+    //             ])
+    //             sh """git tag"""
+    //             script {
+    //                 message=sh(script:"git tag",returnStdout: true)
+    //                 echo "${message}"
+    //             } 
+    //         }
+    //     }
 
         stage('Build and Package') {
             steps {
