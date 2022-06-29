@@ -26,33 +26,12 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build and Package') {
             steps {
                 echo "On Build stage...."
                 sh '''docker-compose up --build -d'''            
             }
         }
-        stage('Test') {
-            steps {
-                echo "On Test stage...."
-                sleep 3
-                script {
-                    env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                }
-                echo "${env.CONTAINER_NAME}"
-                sh """curl -X GET \"${env.CONTAINER_NAME}/employees\""""
-            }
-        }
-        stage('Package') {
-            steps {
-                echo "On Package stage...."
-                script {
-                    // sh '''docker tag todolist $image_name:$tag'''
-                    sh '''docker images'''
-                }
-            }
-        }
-
         stage('End-to-End Test') {
             when {
                 anyOf {
@@ -61,7 +40,13 @@ pipeline {
                 }
             }
             steps {
-                echo "On E2E stage...."
+                echo "On Test stage...."
+                sleep 3
+                script {
+                    env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
+                }
+                echo "${env.CONTAINER_NAME}"
+                sh """curl ${env.CONTAINER_NAME}"""
             }
         }
 
@@ -80,7 +65,6 @@ pipeline {
             }
             steps {
                 echo "On Publish stage...."
-                sh "gcloud container clusters get-credentials todolist --zone europe-west9-c --project portfolio-todolist-352710"
             }
         }
 
