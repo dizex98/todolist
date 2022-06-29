@@ -20,7 +20,7 @@ pipeline {
                     userRemoteConfigs: scm.userRemoteConfigs,
                 ])
                 script {
-                    message=sh(script:"git tag",returnStdout: true).trim()
+                    message=sh(script:"git tag",returnStdout: true)
                     echo "${message}"
                 } 
             }
