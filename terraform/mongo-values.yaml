@@ -9,7 +9,10 @@ auth:
   passwords: [ "itay","itay" ]
 replicaSetName: rs
 replicaSetHostnames: true
-# command: ["mongosh --file docker-entrypoint-initdb.d/initdb-script.js"]
+# command: ['mongosh']
+# args: ['--file','docker-entrypoint-initdb.d/initdb-script.js']
+image:
+  tag: "5.0.9"
 initdbScripts:
   initdb-script.js: |
     db = connect( 'mongodb://root:itay@0.0.0.0/employees' );
