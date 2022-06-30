@@ -59,6 +59,7 @@ pipeline {
                 script{
                     // git branch: 'release', credentialsId: '42b8f8e1-6068-4672-9313-9d3f745db8b5', url: 'git@gitlab:developer/suggest-lib.git'
                     try{
+                        sh """git tag"""
                         current_version=sh(script: "git tag | tail -n 1 | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
                         echo "current version=${current_version}"
                     }
