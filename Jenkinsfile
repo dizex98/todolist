@@ -71,7 +71,7 @@ pipeline {
                     // sh "git config --global user.email 'jenkins@example.com'"
                     // sh "git config --global user.name 'jenkins'"
                     sh "git clean -f && git reset && git commit --allow-empty -m 'releasing v.${new_version}'"
-                    sh "git log --oneline"
+                    sh "git log --oneline --all | head -n 6"
                     sh "git tag v.${new_version}"
                     sh "git tag && git push origin master --tags --force"
                 }
