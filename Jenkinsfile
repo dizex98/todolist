@@ -57,7 +57,6 @@ pipeline {
             }
             steps {
                 script{
-                    // git branch: 'release', credentialsId: '42b8f8e1-6068-4672-9313-9d3f745db8b5', url: 'git@gitlab:developer/suggest-lib.git'
                     try{
                         sh """git tag"""
                         current_version=sh(script: "git tag | tail -n 1 | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
@@ -66,8 +65,10 @@ pipeline {
                     catch (Exception e){
                         current_version='0'
                     }
-                    new_version=plusOne(current_version)
-                    echo "new_version=${new_version}"
+                    env.new_version=plusOne(current_version)
+                    echo "new_version=${env.new_version}"
+                    sh "git clean -f && git reset && git commit --allow-empty -m 'releasing v.${new_version}'"
+                    sh "git tag v.${new_version} && git push --tags --set-upstream origin master"
                 }
             }
         }
