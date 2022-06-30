@@ -65,6 +65,7 @@ pipeline {
                     catch (Exception e){
                         current_version='0'
                     }
+                    git branch: env.GIT_BRANCH, credentialsId: 'github', url: 'git@github.com:dizex98/todolist.git'
                     env.new_version=plusOne(current_version)
                     echo "new_version=${env.new_version}"
                     sh "git config --global user.email 'jenkins@example.com'"
