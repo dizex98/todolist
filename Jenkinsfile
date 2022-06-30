@@ -59,13 +59,13 @@ pipeline {
                 script{
                     try{
                         sh """git tag"""
-                        current_version=sh(script: "git tag | tail -n 1 | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
+                        current_version=sh(script: "git tag | tail -n 1 | | grep 'v.*' | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
                         echo "current version=${current_version}"
                     }
                     catch (Exception e){
                         current_version='0'
                     }
-                    git branch: env.GIT_BRANCH, credentialsId: 'github', url: 'git@github.com:dizex98/todolist.git'
+                    //git branch: env.GIT_BRANCH, credentialsId: 'github', url: 'git@github.com:dizex98/todolist.git'
                     env.new_version=plusOne(current_version)
                     echo "new_version=${env.new_version}"
                     // sh "git config --global user.email 'jenkins@example.com'"
