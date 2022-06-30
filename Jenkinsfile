@@ -59,7 +59,7 @@ pipeline {
                 script{
                     try{
                         sh """git tag"""
-                        current_version=sh(script: "git tag | tail -n 1 | | grep 'v.*' | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
+                        current_version=sh(script: "git tag | tail -n 1 | grep 'v.*' | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
                         echo "current version=${current_version}"
                     }
                     catch (Exception e){
