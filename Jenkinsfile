@@ -58,7 +58,6 @@ pipeline {
             }
             steps {
                 echo "On tag stage...."
-                sh """git tag"""
             }
         }
 
