@@ -68,8 +68,8 @@ pipeline {
                     new_version=plusOne(current_version)
                     echo "new_version=${new_version}"
                 }
+            }
         }
-
         stage('Publish') {
             when {
                 branch pattern: 'master'
