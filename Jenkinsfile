@@ -47,7 +47,6 @@ pipeline {
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
                 }
-                echo "${env.CONTAINER_NAME}"
                 sh """curl ${env.CONTAINER_NAME}"""
             }
         }
@@ -57,9 +56,18 @@ pipeline {
                 branch pattern: 'master'
             }
             steps {
-                sh """git tag"""
-                echo "On tag stage...."
-            }
+                script{
+                    // git branch: 'release', credentialsId: '42b8f8e1-6068-4672-9313-9d3f745db8b5', url: 'git@gitlab:developer/suggest-lib.git'
+                    try{
+                        current_version=sh(script: "git tag | tail -n 1 | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
+                        echo "current version=${current_version}"
+                    }
+                    catch (Exception e){
+                        current_version='0'
+                    }
+                    new_version=plusOne(current_version)
+                    echo "new_version=${new_version}"
+                }
         }
 
         stage('Publish') {
@@ -77,4 +85,8 @@ pipeline {
             sh '''docker-compose down'''
         }
     }
+}
+int plusOne(String version){
+    int new_version=Integer.parseInt(version)+1
+    return new_version
 }
