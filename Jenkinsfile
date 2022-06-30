@@ -57,6 +57,7 @@ pipeline {
                 branch pattern: 'master'
             }
             steps {
+                sh """git tag"""
                 echo "On tag stage...."
             }
         }
