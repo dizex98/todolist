@@ -68,8 +68,8 @@ pipeline {
                     git branch: env.GIT_BRANCH, credentialsId: 'github', url: 'git@github.com:dizex98/todolist.git'
                     env.new_version=plusOne(current_version)
                     echo "new_version=${env.new_version}"
-                    sh "git config --global user.email 'jenkins@example.com'"
-                    sh "git config --global user.name 'jenkins'"
+                    // sh "git config --global user.email 'jenkins@example.com'"
+                    // sh "git config --global user.name 'jenkins'"
                     sh "git clean -f && git reset && git commit --allow-empty -m 'releasing v.${new_version}'"
                     sh "git tag v.${new_version} && git push --tags origin master"
                 }
