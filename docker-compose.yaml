@@ -8,10 +8,10 @@ services:
       - "80:80"
     depends_on:
       - backend
-      - mongo-0.mongodb-headless
+      - mongodb-0.mongodb-headless
     networks:
       - portfolio_net
-  mongo-0.mongodb-headless:
+  mongodb-0.mongodb-headless:
     build: 
       dockerfile: Dockerfile_mongo
       context: .
@@ -21,7 +21,7 @@ services:
   backend:
     build: .
     depends_on:
-      - mongo-0.mongodb-headless
+      - mongodb-0.mongodb-headless
     # ports:
     #   - "5000:5000"
     networks:
