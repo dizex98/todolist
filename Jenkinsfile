@@ -85,7 +85,6 @@ pipeline {
                 echo "On Publish stage...."
             }
         }
-
     }
     post {
         always {

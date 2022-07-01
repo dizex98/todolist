@@ -38,9 +38,9 @@ resource "helm_release" "todolist" {
   chart      = "../kube/todolist"
 }
 
-data "kubectl_file_documents" "argocd" {
-  content = file("./argocd/install.yaml")
-}
+# data "kubectl_file_documents" "argocd" {
+#   content = file("./argocd/install.yaml")
+# }
 
 # resource "kubectl_manifest" "argocd" {
 #   for_each  = data.kubectl_file_documents.argocd.manifests
