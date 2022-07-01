@@ -46,10 +46,11 @@ pipeline {
                 sleep 1
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
+                    env.DOMAIN=${env.CONTAINER_NAME}+"/tasks"
                 }
                 // curl -X GET '${env.CONTAINER_NAME}/tasks'
                 sh """
-                    curl -X POST -F 'emp_id=20' -F 'desc="adding desc"' -F 'due_date="Today"' '${env.CONTAINER_NAME}:80/tasks'
+                    curl -X POST -F 'emp_id=20' -F 'desc="adding desc"' -F 'due_date="Today"' ${env.DOMAIN}
                     sleep 30
                     """
             }
