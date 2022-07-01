@@ -49,7 +49,7 @@ pipeline {
                 }
                 // curl -X GET '${env.CONTAINER_NAME}/tasks'
                 sh """
-                    curl -X POST -F 'emp_id=20' -F 'desc="adding desc"' -F 'due_date="Today"' '${env.CONTAINER_NAME}/tasks'
+                    curl -X POST -F 'emp_id=20' -F 'desc="adding desc"' -F 'due_date="Today"' '${env.CONTAINER_NAME}:80/tasks'
                     sleep 30
                     """
             }
