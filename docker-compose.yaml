@@ -22,8 +22,6 @@ services:
     build: .
     depends_on:
       - mongodb-0.mongodb-headless
-    # ports:
-    #   - "5000:5000"
     networks:
       - portfolio_net
 volumes:

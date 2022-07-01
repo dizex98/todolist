@@ -43,11 +43,15 @@ pipeline {
             }
             steps {
                 echo "On Test stage...."
-                sleep 3
+                sleep 1
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
                 }
-                sh """curl ${env.CONTAINER_NAME}"""
+                // curl -X GET '${env.CONTAINER_NAME}/tasks'
+                sh """
+                    curl -X POST -F 'emp_id=20' -F 'desc="adding desc"' -F 'due_date="Today"' ${env.CONTAINER_NAME}/tasks
+                    sleep 30
+                    """
             }
         }
 
