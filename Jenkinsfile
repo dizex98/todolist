@@ -50,8 +50,7 @@ pipeline {
                 }
                 // curl -X GET '${env.CONTAINER_NAME}/tasks'
                 sh """
-                    curl ${env.DOMAIN}
-                    curl -X POST -F 'emp_id=20' -F 'desc="adding desc"' -F 'due_date="Today"' ${env.DOMAIN}
+                    curl -X POST -F 'emp_id=20' -F 'desc="added from jenkins"' -F 'due_date="01/01/2040"' ${env.DOMAIN}
                     curl ${env.DOMAIN}
                     sleep 10
                     """
