@@ -50,9 +50,15 @@ pipeline {
                 }
                 // curl -X GET '${env.CONTAINER_NAME}/tasks'
                 sh """
-                    curl -X POST -F 'emp_id=20' -F 'desc="added from jenkins"' -F 'due_date="01/01/2040"' ${env.DOMAIN}
+                    curl -X POST -F 'emp_id=20' -F 'desc="Post from jenkins"' -F 'due_date="01/01/2040"' ${env.DOMAIN}
                     curl ${env.DOMAIN}
-                    sleep 10
+                    sleep 5
+                    curl -X POST -F 'update_task_id=999' -F 'update_desc="Update from jenkins"' ${env.DOMAIN}
+                    curl ${env.DOMAIN}
+                    sleep 5
+                    curl -X POST -F 'del_task_id=999' ${env.DOMAIN}
+                    curl ${env.DOMAIN}
+                    sleep 5
                     """
             }
         }
