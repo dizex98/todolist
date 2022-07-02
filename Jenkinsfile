@@ -63,7 +63,6 @@ pipeline {
                     env.new_version=plusOne(current_version)
                     echo "new_version=${env.new_version}"
                     withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'tempfile', usernameVariable: 'jenkins')]) {
-                        sh """ssh -T git@github.com"""
                         sh "git tag v.${new_version} && git push origin --tags"
                     }
                 }
