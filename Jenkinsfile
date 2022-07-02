@@ -60,11 +60,12 @@ pipeline {
                         current_version='0'
                     }
                     //git branch: env.GIT_BRANCH, credentialsId: 'github', url: 'git@github.com:dizex98/todolist.git'
+                    sh """ssh -T git@github.com"""
                     env.new_version=plusOne(current_version)
                     echo "new_version=${env.new_version}"
-                    withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'tempfile', usernameVariable: 'jenkins')]) {
-                        sh "git tag v.${new_version} && git push origin --tags"
-                    }
+                    // withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'tempfile', usernameVariable: 'jenkins')]) {
+                    //     sh "git tag v.${new_version} && git push origin --tags"
+                    // }
                 }
             }
         }
