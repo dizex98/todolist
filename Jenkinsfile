@@ -46,7 +46,8 @@ pipeline {
                 sleep 1
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                    env.DOMAIN="http://localhost/tasks"
+                    env.CONTAINER_NAME="localhost"
+                    env.DOMAIN="http://${env.CONTAINER_NAME}/tasks"
                 }
                 // curl -X GET '${env.CONTAINER_NAME}/tasks'
                 sh """
