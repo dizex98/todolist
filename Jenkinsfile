@@ -8,25 +8,6 @@ pipeline {
         tag = "latest"
     }
     stages {        
-    //     stage('Checkout')
-    //     {
-    //         steps {
-    //             echo "Checkout stage for clearing dir"
-    //             deleteDir()
-    //             checkout([
-    //                 $class: 'GitSCM',
-    //                 branches: scm.branches,
-    //                 doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-    //                 extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
-    //                 userRemoteConfigs: scm.userRemoteConfigs,
-    //             ])
-    //             sh """git tag"""
-    //             script {
-    //                 message=sh(script:"git tag",returnStdout: true)
-    //                 echo "${message}"
-    //             } 
-    //         }
-    //     }
 
         stage('Build and Package') {
             steps {
@@ -42,23 +23,25 @@ pipeline {
                 }
             }
             steps {
-                echo "On Test stage...."
+                echo "E2E stage...."
                 sleep 1
                 script {
                     env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true).trim()
                     env.DOMAIN="${env.CONTAINER_NAME}/tasks"
                 }
-                // curl -X GET '${env.CONTAINER_NAME}/tasks'
                 sh """
-                    curl -X POST -F 'emp_id=20' -F 'desc="Post from jenkins"' -F 'due_date="01/01/2040"' ${env.DOMAIN}
+                    curl -X POST -F 'emp_id=20' -F 'desc="POST from jenkins"' -F 'due_date="01/01/2040"' ${env.DOMAIN}
                     curl ${env.DOMAIN}
-                    sleep 5
-                    curl -X POST -F 'update_task_id=999' -F 'update_desc="Update from jenkins"' ${env.DOMAIN}
+                    echo "POST from jenkins has been successeeded..."
+                    sleep 2
+                    curl -X POST -F 'update_task_id=999' -F 'update_desc="PUT from jenkins"' ${env.DOMAIN}
                     curl ${env.DOMAIN}
-                    sleep 5
+                    echo "PUT from jenkins has been successeeded..."
+                    sleep 2
                     curl -X POST -F 'del_task_id=999' ${env.DOMAIN}
                     curl ${env.DOMAIN}
-                    sleep 5
+                    echo "DELETE from jenkins has been successeeded..."
+                    sleep 2
                     """
             }
         }
