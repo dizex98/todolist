@@ -45,8 +45,8 @@ pipeline {
                 echo "On Test stage...."
                 sleep 1
                 script {
-                    env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true)
-                    env.CONTAINER_NAME="todolist_master_frontend_1"
+                    env.CONTAINER_NAME=sh(script:"docker ps | grep frontend | rev | cut -d ' ' -f1 | rev",returnStdout: true).trim()
+                    // env.CONTAINER_NAME="todolist_master_frontend_1"
                     env.DOMAIN="http://${env.CONTAINER_NAME}/tasks"
                 }
                 // curl -X GET '${env.CONTAINER_NAME}/tasks'
