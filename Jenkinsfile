@@ -53,7 +53,6 @@ pipeline {
             steps {
                 script{
                     try{
-                        sh """git tag"""
                         current_version=sh(script: "git tag | tail -n 1 | grep 'v.*' | grep -Eo '[0-9]{1,24}'", returnStdout: true).trim()
                         echo "current version=${current_version}"
                     }
@@ -63,8 +62,7 @@ pipeline {
                     //git branch: env.GIT_BRANCH, credentialsId: 'github', url: 'git@github.com:dizex98/todolist.git'
                     env.new_version=plusOne(current_version)
                     echo "new_version=${env.new_version}"
-                    sh "git tag v.${new_version}"
-                    sh "git tag && git push origin master --tags --force"
+                    sh "git tag v.${new_version} && git push origin --tags"
                 }
             }
         }
