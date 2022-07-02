@@ -59,10 +59,9 @@ pipeline {
                         current_version='0'
                     }
                     env.new_version=plusOne(current_version)
-                    // get it back once publish is done
-                    // withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'tempfile', usernameVariable: 'jenkins')]) {
-                    //     sh "git tag v.${new_version} && git push origin --tags"
-                    // }
+                    withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'tempfile', usernameVariable: 'jenkins')]) {
+                        sh "git tag v.${new_version} && git push origin --tags"
+                    }
                 }
             }
         }
