@@ -72,11 +72,13 @@ pipeline {
             }
             steps {
                 echo "On Publish stage...."
-                sh """
-                    aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 644435390668.dkr.ecr.eu-central-1.amazonaws.com
-                    docker tag todolist_master_backend ${repository}/${app_image}:${env.new_version}
-                    docker push ${repository}/${app_image}:${env.new_version}
-                """
+                withCredentials([aws(credentialsId:'aws-cred',accessKeyVariable:'AWS_ACCESS_KEY_ID',secretKeyVariable:'AWS_SECRET_ACCESS_KEY')]) {
+                    sh """
+                        aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 644435390668.dkr.ecr.eu-central-1.amazonaws.com
+                        docker tag todolist_master_backend ${repository}/${app_image}:${env.new_version}
+                        docker push ${repository}/${app_image}:${env.new_version}
+                    """
+                }
             }
         }
     }
