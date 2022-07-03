@@ -36,7 +36,11 @@ resource "helm_release" "argocd" {
   version    = "4.9.8"
 }
 
-resource "helm_release" "todolist" {
-  name       = "todolist"
-  chart      = "../kube/todolist"
+# resource "helm_release" "todolist" {
+#   name       = "todolist"
+#   chart      = "../kube/todolist"
+# }
+
+resource "kubectl_manifest" "config" {
+  yaml_body = file("../argocd/application.yaml")
 }

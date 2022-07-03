@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dizex98/todolist.git
+    targetRevision: HEAD
+    path: kube/todolist
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
