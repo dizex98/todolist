@@ -17,3 +17,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: default
+
+
+#### check how it looks on the ui when you change the helm chart
