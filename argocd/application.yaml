@@ -8,7 +8,6 @@ spec:
   syncPolicy:
     automated:
       prune: true
-      allowEmpty: true
   source:
     repoURL: https://github.com/dizex98/todolist.git
     targetRevision: HEAD
