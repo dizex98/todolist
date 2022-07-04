@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   syncPolicy:
-    automated:
-      prune: true
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://github.com/dizex98/todolist.git
     targetRevision: HEAD
