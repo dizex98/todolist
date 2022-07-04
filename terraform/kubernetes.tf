@@ -17,17 +17,3 @@ provider "kubectl" {
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   load_config_file       = false
 }
-
-resource "kubernetes_namespace" "argocd" {
-  metadata {
-    annotations = {
-      name = "argocd-annotation"
-    }
-
-    labels = {
-      mylabel = "argocd"
-    }
-
-    name = "argocd"
-  }
-}

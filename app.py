@@ -12,7 +12,7 @@ now = datetime.now()
 
 app = Flask(__name__)
 CONNECTION_STRING = "mongodb://root:itay@mongodb-0.mongodb-headless:27017"
-# CONNECTION_STRING = "mongodb://root:itay@mongo:27017/"
+
 
 def get_database():
 
@@ -40,7 +40,7 @@ def get_database():
 def health():
     try:
         conn = MongoClient(CONNECTION_STRING)
-        return render_template("health.html",status ="You have been connected Successfully!"),200
+        return render_template("health.html",status ="You have been connected Successfully!!"),200
     except:
         return render_template("health.html",status ="Oops.. The database is unreachable :("),500
 
