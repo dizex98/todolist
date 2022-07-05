@@ -1,5 +1,5 @@
 architecture: replicaset
-replicaCount: 3
+replicaCount: 2
 auth:
   enabled: true
   rootUser: root
@@ -9,6 +9,8 @@ auth:
   passwords: [ "itay","itay" ]
 replicaSetName: rs
 replicaSetHostnames: true
+# metrics:
+#   enabled: true
 image:
   tag: "5.0.9"
 initdbScripts:

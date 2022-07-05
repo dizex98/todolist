@@ -15,6 +15,10 @@ resource "helm_release" "nginx-ing" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx-ingress-controller"
   version    = "9.2.13"
+
+  values = [
+    file("./nginx-values.yaml")
+  ]
 }
 
 resource "helm_release" "mongodb" {
