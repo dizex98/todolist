@@ -1,0 +1,12 @@
+* Start with getting all up by running the following commands:
+    1) cd ./todolist/terraform
+    2) terraform apply
+    * all should be up after 15-20 min approximately
+* After the waiting, in order to connect to the cluster run the following command:
+    - aws eks update-kubeconfig --name itay-cluster --region eu-central-1
+* Afterwards, you'll need to change the ip on the noip site:
+    1) kubectl get svc/nginx-ing-nginx-ingress-controller
+    * copy the external IP
+    2) nslookup <external-ip>
+    - You can use one of them on site.
+* Finally, you can enter to the domain http://itayportfolio.ddns.net
