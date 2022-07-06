@@ -7,6 +7,14 @@
 * Afterwards, you'll need to change the ip on the noip site:
     1) kubectl get svc/nginx-ing-nginx-ingress-controller
     * copy the external IP
-    2) nslookup <external-ip>
+    2) nslookup $external_ip
     - You can use one of them on site.
 * Finally, you can enter to the domain http://itayportfolio.ddns.net
+
+Jenkins:
+
+- cd ~/Desktop/portfolio/
+- docker-compose up --build -d
+* Applying the webhook trigger:
+    - run the command: ngrok http 8080
+    - Update the url on the github same as on the "Forwarding" line. (for example https://1008-77-137-66-29.eu.ngrok.io)
