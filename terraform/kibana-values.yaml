@@ -1,0 +1,14 @@
+elasticsearch:
+  ## @param elasticsearch.hosts List of elasticsearch hosts to connect to.
+  ## e.g:
+  ## hosts:
+  ##   - elasticsearch-1
+  ##   - elasticsearch-2
+  ##
+  hosts:
+    - elasticsearch-1
+    - elasticsearch-2
+    - elasticsearch-3
+  ## @param elasticsearch.port Elasticsearch port
+  ##
+  port: "9200"

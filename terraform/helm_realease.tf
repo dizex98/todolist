@@ -53,17 +53,42 @@ resource "helm_release" "prometheus" {
   namespace        = "prometheus"
   version          = "36.2.1"
   create_namespace = true
+
+  values = [
+    file("./prom-values.yaml")
+  ]
 }
 
 resource "helm_release" "elastic" {
   name             = "elastic"
   repository       = "https://helm.elastic.co"
-  chart            = "eck-operator"
+  chart            = "elasticsearch"
   namespace        = "elastic"
-  version          = "2.3.0"
+  version          = "7.17.3"
   create_namespace = true
 }
 
+resource "helm_release" "fluent" {
+  name             = "fluent"
+  repository       = "https://fluent.github.io/helm-charts"
+  chart            = "fluent-bit"
+  namespace        = "elastic"
+  create_namespace = true
+  depends_on = [helm_release.elastic] 
+}
+
+resource "helm_release" "kibana" {
+  name             = "kibana"
+  repository       = "https://charts.bitnami.com/bitnami"
+  chart            = "kibana"
+  namespace        = "elastic"
+  depends_on = [helm_release.elastic]
+
+  values = [
+    file("./kibana-values.yaml")
+  ]
+
+}
 # resource "helm_release" "todolist" {
 #   name       = "todolist"
 #   chart      = "../kube/todolist"
