@@ -6,9 +6,9 @@ elasticsearch:
   ##   - elasticsearch-2
   ##
   hosts:
-    - elasticsearch-1
-    - elasticsearch-2
-    - elasticsearch-3
+    - elasticsearch-master-0
+    - elasticsearch-master-1
+    - elasticsearch-master-2
   ## @param elasticsearch.port Elasticsearch port
   ##
   port: "9200"
