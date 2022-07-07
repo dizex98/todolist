@@ -1,5 +1,5 @@
 architecture: replicaset
-replicaCount: 2
+replicaCount: 3
 auth:
   enabled: true
   rootUser: root
