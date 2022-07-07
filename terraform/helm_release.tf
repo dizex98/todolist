@@ -79,17 +79,9 @@ resource "helm_release" "fluent" {
 
 resource "helm_release" "kibana" {
   name             = "kibana"
-  repository       = "https://charts.bitnami.com/bitnami"
+  repository       = "https://helm.elastic.co"
   chart            = "kibana"
   namespace        = "elastic"
   depends_on = [helm_release.elastic]
-
-  values = [
-    file("./kibana-values.yaml")
-  ]
-
+  version = "7.17.3"
 }
-# resource "helm_release" "todolist" {
-#   name       = "todolist"
-#   chart      = "../kube/todolist"
-# }
