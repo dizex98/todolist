@@ -59,34 +59,35 @@ resource "helm_release" "prometheus" {
   ]
 }
 
-resource "helm_release" "elastic" {
-  name             = "elastic"
-  repository       = "https://helm.elastic.co"
-  chart            = "elasticsearch"
-  namespace        = "elastic"
-  version          = "7.17.3"
-  create_namespace = true
-}
+#### Only works with t2.large and above
+# resource "helm_release" "elastic" {
+#   name             = "elastic"
+#   repository       = "https://helm.elastic.co"
+#   chart            = "elasticsearch"
+#   namespace        = "elastic"
+#   version          = "7.17.3"
+#   create_namespace = true
+# }
 
-resource "helm_release" "fluentd" {
-  name             = "fluentd"
-  repository       = "https://charts.bitnami.com/bitnami"
-  chart            = "fluentd"
-  namespace        = "elastic"
-  create_namespace = true
-  depends_on = [helm_release.elastic] 
-}
+# resource "helm_release" "fluentd" {
+#   name             = "fluentd"
+#   repository       = "https://charts.bitnami.com/bitnami"
+#   chart            = "fluentd"
+#   namespace        = "elastic"
+#   create_namespace = true
+#   depends_on = [helm_release.elastic] 
+# }
 
-resource "helm_release" "kibana" {
-  name             = "kibana"
-  repository       = "https://helm.elastic.co"
-  chart            = "kibana"
-  namespace        = "elastic"
-  depends_on = [helm_release.elastic]
-  # version = "10.1.16"
-  version = "7.17.3"
+# resource "helm_release" "kibana" {
+#   name             = "kibana"
+#   repository       = "https://helm.elastic.co"
+#   chart            = "kibana"
+#   namespace        = "elastic"
+#   depends_on = [helm_release.elastic]
+#   # version = "10.1.16"
+#   version = "7.17.3"
 
-  values = [
-    file("./kibana-values.yaml")
-  ]
-}
+#   values = [
+#     file("./kibana-values.yaml")
+#   ]
+# }
