@@ -1,14 +1,20 @@
-elasticsearch:
-  ## @param elasticsearch.hosts List of elasticsearch hosts to connect to.
-  ## e.g:
-  ## hosts:
-  ##   - elasticsearch-1
-  ##   - elasticsearch-2
-  ##
-  hosts:
-    - elasticsearch-master-0
-    - elasticsearch-master-1
-    - elasticsearch-master-2
-  ## @param elasticsearch.port Elasticsearch port
-  ##
-  port: "9200"
+# elasticsearch:
+#   ## @param elasticsearch.hosts List of elasticsearch hosts to connect to.
+#   ## e.g:
+#   ## hosts:
+#   ##   - elasticsearch-1
+#   ##   - elasticsearch-2
+#   ##
+#   hosts:
+#     - elasticsearch-master
+#   ## @param elasticsearch.port Elasticsearch port
+#   ##
+#   port: 9200
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+  limits:
+    cpu: "500m"
+    memory: "1Gi"

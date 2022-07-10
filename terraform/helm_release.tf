@@ -68,10 +68,10 @@ resource "helm_release" "elastic" {
   create_namespace = true
 }
 
-resource "helm_release" "fluent" {
-  name             = "fluent"
-  repository       = "https://fluent.github.io/helm-charts"
-  chart            = "fluent-bit"
+resource "helm_release" "fluentd" {
+  name             = "fluentd"
+  repository       = "https://charts.bitnami.com/bitnami"
+  chart            = "fluentd"
   namespace        = "elastic"
   create_namespace = true
   depends_on = [helm_release.elastic] 
@@ -83,5 +83,10 @@ resource "helm_release" "kibana" {
   chart            = "kibana"
   namespace        = "elastic"
   depends_on = [helm_release.elastic]
+  # version = "10.1.16"
   version = "7.17.3"
+
+  values = [
+    file("./kibana-values.yaml")
+  ]
 }
