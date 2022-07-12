@@ -88,6 +88,6 @@ resource "helm_release" "prometheus" {
 #   version = "7.17.3"
 
 #   values = [
-#     file("./kibana-values.yaml")
+#     file("./values/kibana-values.yaml")
 #   ]
 # }
