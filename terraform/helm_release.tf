@@ -17,7 +17,7 @@ resource "helm_release" "nginx-ing" {
   version    = "9.2.13"
 
   values = [
-    file("./nginx-values.yaml")
+    file("./values/nginx-values.yaml")
   ]
 }
 
@@ -28,7 +28,7 @@ resource "helm_release" "mongodb" {
   version    = "12.1.21"
 
   values = [
-    file("./mongo-values.yaml")
+    file("./values/mongo-values.yaml")
   ]
 }
 
@@ -55,7 +55,7 @@ resource "helm_release" "prometheus" {
   create_namespace = true
 
   values = [
-    file("./prom-values.yaml")
+    file("./values/prom-values.yaml")
   ]
 }
 
