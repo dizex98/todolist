@@ -5,7 +5,7 @@ pipeline {
         repository = "644435390668.dkr.ecr.eu-central-1.amazonaws.com"
         app_image = "todolist-itay-app"
         mongo_image = "todolist-itay-mongo"
-        tag = "latest"
+        //tag = "latest"
     }
     stages {        
 

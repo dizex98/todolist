@@ -1,5 +1,5 @@
 FROM mongo:5.0.9
-ENV MONGO_INITDB_ROOT_USERNAME=root
-ENV MONGO_INITDB_ROOT_PASSWORD=itay
+# ENV MONGO_INITDB_ROOT_USERNAME="${ROOT_USERNAME}"
+# ENV MONGO_INITDB_ROOT_PASSWORD="${ROOT_PASSWORD}"
 COPY ./init-mongo.js /docker-entrypoint-initdb.d/init-mongo.js
 VOLUME ./mongo_data /data/db

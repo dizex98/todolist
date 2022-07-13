@@ -12,6 +12,9 @@ services:
     networks:
       - portfolio_net
   mongodb-0.mongodb-headless:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${ROOT_PASSWORD}
     build: 
       dockerfile: Dockerfile_mongo
       context: .
