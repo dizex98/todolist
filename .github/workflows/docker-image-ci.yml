@@ -15,4 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build docker compose components
-      run: docker-compose up -d
+      run: |
+        docker network create portfolio_net
+        docker-compose up -d
+        
