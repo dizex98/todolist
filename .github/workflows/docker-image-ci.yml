@@ -25,7 +25,7 @@ jobs:
     - name: Testing with curl command
       run: |
         docker ps
-        curl localhost/tasks
+        curl "localhost/tasks"
   
   # test:
   #   needs: build
