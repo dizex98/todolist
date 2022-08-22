@@ -17,5 +17,10 @@ jobs:
     - name: Build docker compose components
       run: |
         docker network create portfolio_net
-        docker-compose up -d
+        docker-compose up --build
+        docker-compose down -v
+  
+  
+  # test:
+  #   needs: build
         
