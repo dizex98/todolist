@@ -15,6 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build docker compose components
+      env:
+        ROOT_USERNAME: ${{secrets.ROOT_USERNAME}}
+        ROOT_PASSWORD: ${{secrets.ROOT_PASSWORD}}
       run: |
         docker network create portfolio_net
         docker-compose up -d
