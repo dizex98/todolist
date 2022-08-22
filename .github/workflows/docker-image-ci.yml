@@ -17,9 +17,11 @@ jobs:
     - name: Build docker compose components
       run: |
         docker network create portfolio_net
-        docker-compose up --build
-        docker-compose down -v
-  
+        docker-compose up --build -d
+    
+    - name: Testing with curl command
+      run: |
+        curl localhost
   
   # test:
   #   needs: build
