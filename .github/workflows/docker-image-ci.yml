@@ -24,7 +24,6 @@ jobs:
     
     - name: Testing with curl command
       run: |
-        docker ps
         curl "localhost/tasks"
   
   # test:
