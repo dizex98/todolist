@@ -22,7 +22,7 @@ jobs:
     - name: Testing with curl command
       run: |
         docker ps
-        curl $(docker ps | grep frontend | rev | cut -d ' ' -f1 | rev)
+        curl todolist_frontend_1
   
   # test:
   #   needs: build
