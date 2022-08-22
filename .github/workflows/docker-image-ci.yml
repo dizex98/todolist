@@ -17,11 +17,10 @@ jobs:
     - name: Build docker compose components
       run: |
         docker network create portfolio_net
-        docker-compose up --build -d
+        docker-compose up -d
     
     - name: Testing with curl command
       run: |
-        docker ps
         curl todolist_frontend_1
   
   # test:
