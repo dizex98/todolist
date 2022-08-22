@@ -21,6 +21,7 @@ jobs:
     
     - name: Testing with curl command
       run: |
+        docker ps | grep frontend | rev | cut -d ' ' -f1 | rev
         curl localhost
   
   # test:
