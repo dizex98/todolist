@@ -25,7 +25,7 @@ jobs:
     - name: Testing with curl command
       run: |
         docker ps
-        #curl todolist_frontend_1
+        curl -v todolist_frontend_1
   
   # test:
   #   needs: build
