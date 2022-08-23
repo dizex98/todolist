@@ -36,7 +36,6 @@ jobs:
         echo "PUT from jenkins has been succeeded..."
         sleep 2
         curl -X POST -F 'del_task_id=999' ${{ env.domain }}
-        curl ${{ env.domain }} | grep 999 -h5
         echo "DELETE from jenkins has been succeeded..."
         sleep 2
 
