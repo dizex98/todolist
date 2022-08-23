@@ -24,7 +24,7 @@ jobs:
     
     - name: Testing with curl command
       run: |
-        curl -v localhost
+        curl localhost
   
   # test:
   #   needs: build
