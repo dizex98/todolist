@@ -16,17 +16,28 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build docker compose components
       env:
-        ROOT_USERNAME: ${{secrets.ROOT_USERNAME}}
-        ROOT_PASSWORD: ${{secrets.ROOT_PASSWORD}}
+        ROOT_USERNAME: ${{ secrets.ROOT_USERNAME }}
+        ROOT_PASSWORD: ${{ secrets.ROOT_PASSWORD }}
       run: |
         docker network create portfolio_net
         docker-compose up -d
     
-    - name: Testing with curl command
+    - name: E2E Tests
+      env:
+        domain: localhost/tasks
       run: |
-        sleep 5
-        curl localhost/tasks
-  
-  # test:
-  #   needs: build
+        sleep 2
+        curl -X POST -F 'emp_id=20' -F 'desc="POST from jenkins"' -F 'due_date="01/01/2040"' ${{ domain }}
+        curl ${{ domain }}
+        echo "POST from jenkins has been succeeded..."
+        sleep 2
+        curl -X POST -F 'update_task_id=999' -F 'update_desc="PUT from jenkins"' ${{ domain }}
+        curl ${{ domain }}
+        echo "PUT from jenkins has been succeeded..."
+        sleep 2
+        curl -X POST -F 'del_task_id=999' ${{ domain }}
+        curl ${{ domain }}
+        echo "DELETE from jenkins has been succeeded..."
+        sleep 2
+
         
