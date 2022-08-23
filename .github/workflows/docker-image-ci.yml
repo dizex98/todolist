@@ -24,7 +24,7 @@ jobs:
     
     - name: Testing with curl command
       run: |
-        curl -v --url localhost/tasks
+        curl -v --url localhost/employees
   
   # test:
   #   needs: build
