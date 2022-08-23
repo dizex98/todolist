@@ -24,6 +24,7 @@ jobs:
     
     - name: Testing with curl command
       run: |
+        sleep 5
         curl localhost
   
   # test:
