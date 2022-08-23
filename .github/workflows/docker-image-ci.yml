@@ -24,19 +24,39 @@ jobs:
     
     - name: E2E Tests
       env:
-        domain: localhost/tasks
+        DOMAIN: localhost/tasks
       run: |
         sleep 2
-        curl -X POST -F 'emp_id=20' -F 'desc="POST from jenkins"' -F 'due_date="01/01/2040"' ${{ env.domain }}
-        curl ${{ env.domain }} | grep "01/01/2040" -h5
+        curl -X POST -F 'emp_id=20' -F 'desc="POST from jenkins"' -F 'due_date="01/01/2040"' $DOMAIN
+        curl $DOMAIN | grep "01/01/2040" -h5
         echo "POST from jenkins has been succeeded..."
         sleep 2
-        curl -X POST -F 'update_task_id=999' -F 'update_desc="PUT from jenkins"' ${{ env.domain }}
-        curl ${{ env.domain }} | grep 999 -h5
+        curl -X POST -F 'update_task_id=999' -F 'update_desc="PUT from jenkins"' $DOMAIN
+        curl $DOMAIN | grep 999 -h5
         echo "PUT from jenkins has been succeeded..."
         sleep 2
-        curl -X POST -F 'del_task_id=999' ${{ env.domain }}
+        curl -X POST -F 'del_task_id=999' $DOMAIN
         echo "DELETE from jenkins has been succeeded..."
         sleep 2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Tag, and push image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: portfolio_backend
+        IMAGE_TAG: latest
+      run: |
+        docker tag todolist_backend_1 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
         
